@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dave White</title>
   </head>
+
   <style>
     @media (prefers-color-scheme: dark){
       body {color:#fff;background:#000}
@@ -26,8 +27,39 @@
 	  max-width:none
 	}
       }
+
+    .sidenav {
+      height: 100%; /* 100% Full-height */
+      width: 20%;
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Stay on top */
+      top: 0; /* Stay at the top */
+      left: 0;
+      background-color: #111; /* Black*/
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 60px; /* Place content 60px from the top */
+    }
+    /* The navigation menu links */
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
   </style>
+
   <body>
+    <div id="sideNav" class="sidenav">
+      <a href="teaching">Teaching</a>
+      <a href="research">Research</a>
+    </div>
     <h1>Welcome to my personal website.</h1>
     <div>
       <p>Currently under construction.</p>
