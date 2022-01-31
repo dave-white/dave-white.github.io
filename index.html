@@ -17,17 +17,19 @@
     body{
       margin:1em auto;
       padding:0 .62em;
-      font:medium/1.62 sans-serif;
-    }
-    h1,h2,h3 {
-      line-height:1.2;
-    }
-    @media print{
-      body{
-	max-width:none
-      }
+      font: medium/1.62 sans-serif;
     }
 
+    h1,h2,h3 {
+      line-height: 1.2em;
+    }
+
+    @media print {
+      body{
+	max-width: none;
+      }
+    }
+    
     #main {
       margin-left: 15%;
       max-width: 40em;
@@ -47,21 +49,26 @@
       left: 0;
       background-color: #111; /* Black*/
       overflow-x: hidden; /* Disable horizontal scroll */
-      padding-top: 60px; /* Place content 60px from the top */
+      padding-top: 4em; /* Place content 60px from the top */
     }
     /* The navigation menu links */
     .sidenav a {
-      padding: 8px 8px 8px 32px;
+      padding: 1ex 1ex 1ex 2ex;
       text-decoration: none;
       font-size: 25px;
       color: #818181;
       display: block;
-      transition: 0.3s;
+    }
+
+    .sidenav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
     }
 
     /* When you mouse over the navigation links, change their color */
     .sidenav a:hover {
-      color: #f1f1f1;
+      color: #f4f4f4;
     }
 
     .main {
@@ -74,22 +81,29 @@
 
   <body>
     <div id="sideNav" class="sidenav">
-      <a href="teaching">Teaching</a>
-      <a href="research">Research</a>
+      <ul>
+	<li><a href="index.html">Home</a></li>
+	<li><a href="teaching.md">Teaching</a></li>
+	<li><a href="research">Research</a></li>
+	<li><a href="cv.md"><i>CV</i></a></li>
+      </ul>
     </div>
     <div id="main" class="main">
-      <h1>Welcome to my personal website.</h1>
-      <p>All webpages at this website are currently under construction. Kindly return again soon, and thank you for your patience.</p>
+      <h1>Welcome to the website of<br><i>David White</i>.</h1>
 
-      <h2>The following is for testing purposes.</h2>
+      <h2>About me</h2>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris potenti netus quam ut quis purus. Nullam per mollis pulvinar dapibus ante nulla consequat luctus vitae nunc. Risus per finibus condimentum donec elit pharetra. Quisque mattis cursus a est habitant dui hendrerit ipsum phasellus eu.</p>
+      <img src="profile.jpeg" alt="Profile picture" width="20%" height="20%" style="margin:0 1em;float:right">
+      <p><i>I am a PhD candidate in the <a href="https://math.sciences.ncsu.edu">Department of Mathematics</a> at North Carolina State University (NC State).</i></p>
 
-      <p>Fringilla velit euismod lorem dapibus himenaeos venenatis sapien ultrices fusce sem nulla urna. Feugiat nam scelerisque nulla blandit habitasse taciti sem maecenas elementum nec erat egestas pulvinar. Dapibus netus commodo id placerat nam vehicula ante quisque. Vestibulum eu vestibulum felis ex dignissim quisque aliquet congue tortor habitasse sociosqu diam amet vivamus sed. Lorem porttitor consectetur lacinia curabitur consectetur auctor inceptos imperdiet dignissim eu aliquam morbi augue eget.</p>
+      <p>My advisor is <a href="https://sites.google.com/ncsu.edu/tlid/home">Tye Lidman</a>.
 
-      <p>Eleifend massa dictumst consectetur cubilia proin. Tempor commodo vivamus class tristique curae conubia. Placerat scelerisque rhoncus auctor nisl lectus fermentum nostra ullamcorper scelerisque tellus fames mollis ultricies. Per integer faucibus sollicitudin justo libero. Maecenas semper dictum sem orci aliquam litora mollis ut ipsum platea neque purus.</p>
+      <h2>Contact information</h2>
 
-      <p>Iaculis ultrices venenatis per quam velit fames vitae. Justo viverra luctus nisi habitant ad auctor faucibus luctus non mollis. Dui euismod mauris accumsan mi volutpat habitasse taciti condimentum sodales quisque faucibus venenatis blandit. Class rutrum fames et dapibus iaculis venenatis maximus suscipit maximus cursus potenti vestibulum potenti quis hendrerit. Viverra condimentum tincidunt sed augue neque tincidunt diam arcu ex vulputate.</p>
+      <ul>
+	<li>Email: <code>dgwhite2</code> "at" <code>ncsu</code> "dot" <code>edu</code></li>
+      </ul>
+      
     </div>
   </body>
 </html>
