@@ -51,14 +51,6 @@
       overflow-x: hidden; /* Disable horizontal scroll */
       padding-top: 4em; /* Place content 60px from the top */
     }
-    /* The navigation menu links */
-    .sidenav a {
-      padding: 1ex 1ex 1ex 2ex;
-      text-decoration: none;
-      font-size: 25px;
-      color: #818181;
-      display: block;
-    }
 
     .sidenav ul {
       list-style-type: none;
@@ -66,9 +58,24 @@
       padding: 0;
     }
 
+    /* The navigation menu links */
+    .sidenav li {
+      padding: 1ex 1ex 1ex 2ex;
+      font-size: x-large;
+    }
+
+    .sidenav a {
+      text-decoration: none;
+      color: #818181;
+    }
+
+    .sidenav .curr {
+      background-color: #444;
+    }
+
     /* When you mouse over the navigation links, change their color */
-    .sidenav a:hover {
-      color: #f4f4f4;
+    .sidenav li.ncurr:hover {
+      background-color: #333;
     }
 
     .main {
@@ -82,14 +89,13 @@
   <body>
     <div id="sideNav" class="sidenav">
       <ul>
-	<li><a href="index.html">Home</a></li>
-	<li><a href="teaching.md">Teaching</a></li>
-	<li><a href="research">Research</a></li>
-	<li><a href="cv.md"><i>CV</i></a></li>
+	<a href="index.html"><li class="ncurr">Home</li></a>
+	<a href="teaching.html"><li class="ncurr">Teaching</li></a>
+	<a href="research.html"><li class="ncurr">Research</li></a>
+	<li class="curr"><i>CV</i></li>
       </ul>
     </div>
     <div id="main" class="main">
-      <p><a href="index.html">Home</a></p>
       <p>This page is currently under construction.</p>
       <p><a href="cv.pdf">PDF copy</a></p>
       <h1 id="curriculum-vitae"><em>Curriculum Vitae</em></h1>
