@@ -12,6 +12,6 @@ The webpages (i.e. principal `html` files and any accompanying static files) are
 
 ### Source
 
-Here I've used `php` in effect as a build utility, being that the whole site is, in the end, completely static by necessity. The script `main.php` builds one of the main `html` files per run out of several component `html` and `php` files; the `Makefile` uses it to build the whole site's worth of webpages. All of this found under `/src`.
+Here I've used `php` in effect as a build utility, being that the whole site is, in the end, completely static by necessity. There is a `.php` corresponding to each of the principal webpage `.html`'s, and the Makefile runs these in turn.  All of this and supporting `php` and static code is found under `/src`.
 
-This way of doing things is just an exercise in minimizing the amount of `html` written---or maximizing its reuse, depending on your point of view. It's certainly unnecessary and arguably more trouble than it's worth, but it gives me something to tinker with.
+This way of doing things is just an exercise in minimizing the amount of `html` written---or maximizing code reuse, depending on your point of view. It's certainly unnecessary and arguably more trouble than it's worth, but it gives me something to tinker with.
