@@ -1,7 +1,19 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<?php include '../head.html' ?>
+<body>
+<?php
+$page = 'accueil';
+include '../side-nav.php';
+?>
+  <?php include 'lang-ver-anchor.html'; ?>
+  <div style="margin-left: 15%">
+    <div id="main" class="main">
       <h1>Bienvenue au site web de<br><i>David White</i>.</h1>
 
       <h2>Sur moi</h2>
+      
+      <?php include '../grad-yrs-calc.php'; ?>
 
       <img src="../profile.jpeg" alt="Profile picture" width="20%" height="20%" style="margin:0 1em;float:right">
       <p><i>Je suis doctorant en math&eacute;matiques au <a href="https://math.sciences.ncsu.edu">D&eacute;partement de Math&eacute;matiques</a> de la <span style="font-variant:small-caps">Universit&eacute; d'&Eacute;tat de la Caroline du Nord</span> (NC State).</i></p>
@@ -15,4 +27,7 @@
       <ul>
 	<li>Email: <code>dgwhite2</code> "arobase" <code>ncsu</code> "point" <code>edu</code></li>
       </ul>
-      
+    </div>
+  </div>
+</body>
+</html>
