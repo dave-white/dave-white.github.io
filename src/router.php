@@ -1,82 +1,72 @@
 <?php
 if (php_sapi_name() == 'cli-server') {
-  $rqst_split_mask = '/(\/[\w\-\/]*\/)?(([\w\-]+)(\.\w+)?)+\/?$/';
-  if (preg_match($rqst_split_mask, $_SERVER["REQUEST_URI"], $matches, PREG_UNMATCHED_AS_NULL)) {
-    $rqst_pieces = array(
-      'uri' => $matches[0],
-      'dir' => $matches[1],
-      'resource' => $matches[2],
-      'resource_name' => $matches[3],
-      'resource_ext' => $matches[4]
-    );
-    foreach ($rqst_pieces as $key => $val) {
-      if (is_null($val)) {
-	$rqst_pieces[$key] = '';
-      }
+  function incl_index()
+  {
+    if (file_exists('index.php')) {
+      include 'index.php';
+    } elseif (file_exists('index.html')) {
+      include 'index.html';
+    } else {
+      include __DIR__.'/index.php';
     }
+  }
 
-    $new_rel_dir = trim($rqst_pieces['dir'], '/');
-    if (strlen($new_rel_dir) > 0 && file_exists($new_rel_dir)) {
-      chdir($new_rel_dir);
-    }
-
-    function incl_index() {
-      if (file_exists('index.php')) {
-	include 'index.php';
-      } elseif (file_exists('index.html')) {
-	include 'index.html';
-      } else {
-	include __DIR__.'/index.php';
-      }
-    }
-
-    if (strlen($rqst_pieces['resource']) > 0) {
-      if (file_exists($rqst_pieces['resource'])) {
-	if (is_dir($rqst_pieces['resource'])) {
-	  chdir($rqst_pieces['resource']);
-	  incl_index();
-	} else {
-	  include $rqst_pieces['resource'];
+  function handle_rqst($rel_uri)
+  {
+    $rqst_split_mask = '/([\w\-\/]*\/)?(([\w\-]+)(\.\w+)?)$/';
+    if (preg_match($rqst_split_mask, $rel_uri, $matches, PREG_UNMATCHED_AS_NULL)) {
+      foreach ($matches as $idx => $val) {
+	if (is_null($val)) {
+	  $matches[$idx] = '';
 	}
-      } elseif (file_exists($rqst_pieces['resource_name'].'.php')) {
-	include $rqst_pieces['resource_name'].'.php';
-      } elseif (file_exists($rqst_pieces['resource_name'].'.html')) {
-	include $rqst_pieces['resource_name'].'.html';
+      }
+      $dir = $matches[1];
+      $resource = $matches[2];
+      $resource_name = $matches[3];
+      $resource_ext = $matches[4];
+
+      $new_rel_dir = trim($dir, '/');
+      if (strlen($new_rel_dir) > 0) {
+	if (is_dir($new_rel_dir)) {
+	  chdir($new_rel_dir);
+	} else {
+	  header('Location: http://'.$_SERVER['HTTP_HOST'].'/');
+	  exit;
+	}
+      }
+
+      if (strlen($resource) > 0) {
+	if (file_exists($resource)) {
+	  include $resource;
+	} elseif (file_exists($resource_name.'.php')) {
+	  include $resource_name.'.php';
+	} elseif (file_exists($resource_name.'.html')) {
+	  include $resource_name.'.html';
+	} else {
+	  header('Location: http://'.$_SERVER['HTTP_HOST'].str_replace(__DIR__, '', getcwd()).'/');
+	}
       } else {
 	incl_index();
       }
     } else {
+      include 'index.php';
+    }
+  }
+
+  $rel_uri = ltrim($_SERVER['REQUEST_URI'], '/');
+  if (is_dir($rel_uri)) {
+    if (! str_ends_with($rel_uri, '/')) {
+      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$rel_uri.'/');
+    } else {
+      chdir($rel_uri);
       incl_index();
     }
-
-//    $ret_file = '';
-//    if (strlen($rqst_pieces['resource_ext'] > 0)) {
-//      $ret_file = $rqst_pieces['resource'];
-//    } elseif (strlen($rqst_pieces['resource_name']) > 0) {
-//      if (is_dir($rqst_pieces['resource_name'])) {
-//	$new_rel_dir = $rqst_pieces['resource_name'];
-//	header('Location: '.$_SERVER['P_HOST'].'/'.$new_rel_dir.'/');
-//	return;
-//	chdir($new_rel_dir);
-//	$ret_file = 'index.php';
-//      } else {
-//	$ret_file = $rqst_pieces['resource_name'].'.php';
-//      }
-//    } else {
-//      $ret_file = 'index.php';
-//    }
-//
-//    if (strlen($ret_file) > 0 && file_exists($ret_file)) {
-//      include $ret_file;
-//    } else {
-//      if (file_exists('index.php')) {
-//	include 'index.php';
-//      } else {
-//	include __DIR__.'/index.php';
-//      }
-//    }
   } else {
-    include 'index.php';
+    if (str_ends_with($rel_uri, '/')) {
+      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.rtrim($rel_uri, '/'));
+    } else {
+      handle_rqst($rel_uri);
+    }
   }
 }
 ?>
