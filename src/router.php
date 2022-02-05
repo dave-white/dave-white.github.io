@@ -1,18 +1,22 @@
 <?php
 if (php_sapi_name() == 'cli-server') {
-  $rsrc_pattern = '/\.\w+$/';
-  if (! preg_match($rsrc_pattern, $_SERVER["REQUEST_URI"])) {
-    $cln_rsrc = trim($_SERVER["REQUEST_URI"],'/').'.php';
-    echo '1';
-    echo $cln_rsrc;
-    include $cln_rsrc;
-  } else {
-    include ltrim($_SERVER["REQUEST_URI"], '/');
+  $rqst_split_mask = '/(.*\/)((\w+)(\.\w+)?)$/';
+  if (preg_match($rqst_split_mask, $_SERVER["REQUEST_URI"], $matches, PREG_UNMATCHED_AS_NULL)) {
+    $rqst_pieces = array(
+      'uri' => $matches[0],
+      'dir' => $matches[1],
+      'resource' => $matches[2],
+      'resource_name' => $matches[3],
+      'resource_ext' => $matches[4]
+    );
+    if (trim($rqst_pieces['dir'], '/') > 0) {
+      chdir(trim($rqst_pieces['dir'], '/'));
+    }
+    if (strlen($rqst_pieces['resource_ext'] > 0)) {
+      include $rqst_pieces['resource'];
+    } else {
+      include $rqst_pieces['resource_name'].'.php';
+    }
   }
-//  if (preg_match('/(index|research|teaching|cv)/', $_SERVER["REQUEST_URI"], $rqst)) {
-//    include $rqst[1].'.php';
-//  } else { 
-//    // pass
-//  }
 }
 ?>
