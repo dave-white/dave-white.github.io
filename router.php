@@ -1,5 +1,12 @@
 <?php
 if (php_sapi_name() == 'cli-server') {
+  function emit_404()
+  {
+    http_response_code(404);
+    include 'pg-404.html';
+    die;
+  }
+
   function incl_index()
   {
     if (file_exists('index.php')) {
@@ -30,8 +37,7 @@ if (php_sapi_name() == 'cli-server') {
 	if (is_dir($new_rel_dir)) {
 	  chdir($new_rel_dir);
 	} else {
-	  header('Location: http://'.$_SERVER['HTTP_HOST'].'/');
-	  exit;
+	  emit_404();
 	}
       }
 
@@ -43,7 +49,7 @@ if (php_sapi_name() == 'cli-server') {
 	} elseif (file_exists($resource_name.'.html')) {
 	  include $resource_name.'.html';
 	} else {
-	  header('Location: http://'.$_SERVER['HTTP_HOST'].str_replace(__DIR__, '', getcwd()).'/');
+	  emit_404();
 	}
       } else {
 	incl_index();
