@@ -8,10 +8,16 @@ I put this under the Creative Commons license probably for no other reason than 
 
 ## Code
 
-The webpages (i.e. principal `html` files and any accompanying static files) are at the root of the site or, in the case of French-language versions, at `/fr`. See below for the rest.
+There is a `.php` file for each webpage of the site. For the English 
+version, these are:
+1. `index.php`,
+2. `research.php`,
+3. `teaching.php`,
+4. `cv.php`.
 
-### Source
+There are corresponding pages for the French version.
 
-Here I've used `php` in effect as a build utility, being that the whole site is, in the end, completely static by necessity. There is a `.php` corresponding to each of the principal webpage `.html`'s, and the Makefile runs these in turn.  All of this and supporting `php` and static code is found under `/src`.
+Since GitHub Pages (github.io) will only utilize static `html`, I've used `make` to build those static files via the `php`.
 
-This way of doing things is just an exercise in minimizing the amount of `html` written---or maximizing code reuse, depending on your point of view. It's certainly unnecessary and arguably more trouble than it's worth, but it gives me something to tinker with.
+The `php` can be used directly by, for example, cloning the repo into `dir`, running `php -S localhost:8000 dir router.php`, and then navigating to `localhost:8000` in the browser. It's that last file, `router.php` that handles all the HTTP requests.
+

@@ -1,5 +1,42 @@
 <?php
 if (php_sapi_name() == 'cli-server') {
+  function default_lang_home()
+  {
+    $supported_langs = array('en', 'fr');
+    $issue_lang = 'en'; // default
+
+    $http_lang_mask = '/([a-z]{1,3}(?:\-[A-Z]{1,3})?)\s*(?:;\s*q\s*=\s*(1|1\.0|0.\d|\.\d))?,/';
+    if (str_ends_with($_SERVER['HTTP_ACCEPT_LANGUAGE'], ',')) {
+      $lang_accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+    } else {
+      $lang_accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'].',';
+    }
+    if (preg_match_all($http_lang_mask, $lang_accept, $matches)) {
+      $user_langs = array();
+      foreach ($matches[1] as $idx => $lang) {
+	if (strlen($matches[2][$idx]) <= 0) {
+	  $user_langs[$lang] = 1.0;
+	} else {
+	  $user_langs[$lang] = floatval($matches[2][$idx]);
+	}
+      }
+      arsort($user_langs);
+
+      foreach ($user_langs as $lang => $weight) {
+	if (in_array($lang, $supported_langs)) {
+	  $issue_lang = $lang;
+	  break;
+	}
+      }
+    }
+
+    if ($issue_lang == 'en') {
+      include 'index.php';
+    } else {
+      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$issue_lang.'/');
+    }
+  }
+
   function emit_404()
   {
     http_response_code(404);
@@ -60,18 +97,26 @@ if (php_sapi_name() == 'cli-server') {
   }
 
   $rel_uri = ltrim($_SERVER['REQUEST_URI'], '/');
-  if (is_dir($rel_uri)) {
-    if (! str_ends_with($rel_uri, '/')) {
-      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$rel_uri.'/');
+  if (strlen($rel_uri) <= 0) {
+    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+      default_lang_home();
     } else {
-      chdir($rel_uri);
-      incl_index();
+      include 'index.php';
     }
   } else {
-    if (str_ends_with($rel_uri, '/')) {
-      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.rtrim($rel_uri, '/'));
+    if (is_dir($rel_uri)) {
+      if (! str_ends_with($rel_uri, '/')) {
+	header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$rel_uri.'/');
+      } else {
+	chdir($rel_uri);
+	incl_index();
+      }
     } else {
-      handle_rqst($rel_uri);
+      if (str_ends_with($rel_uri, '/')) {
+	header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.rtrim($rel_uri, '/'));
+      } else {
+	handle_rqst($rel_uri);
+      }
     }
   }
 }
