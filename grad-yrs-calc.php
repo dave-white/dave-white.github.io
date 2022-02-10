@@ -6,5 +6,5 @@ if ($yr_dur_ord == 1) {
 } elseif ($yr_dur_ord == 2) {
   $yr_dur_suffix = 'nd';
 }
-$str_yr_dur_ord = sprintf('%d-'.$yr_dur_suffix, $yr_dur_ord);
+$str_yr_dur_ord = sprintf('%d'.$yr_dur_suffix, $yr_dur_ord);
 ?>

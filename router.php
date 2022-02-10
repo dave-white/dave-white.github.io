@@ -106,6 +106,7 @@ if (php_sapi_name() == 'cli-server') {
   } else {
     if (is_dir($rel_uri)) {
       if (! str_ends_with($rel_uri, '/')) {
+	// if (! handle_rqst($rel_uri))
 	header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$rel_uri.'/');
       } else {
 	chdir($rel_uri);

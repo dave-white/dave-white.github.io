@@ -4,5 +4,6 @@ $pg_array = array(
 'research' => 'Research',
 'teaching' => 'Teaching',
 'cv' => '<i>CV</i>',
+'interests' => 'Interests',
 );
 ?>
