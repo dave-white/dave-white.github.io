@@ -34,7 +34,8 @@ include 'side-nav.php';
 
     <ul>
       <li>Email: <code>dgwhite2</code> "at" <code>ncsu</code> "dot" <code>edu</code></li>
-      <li>Discord:</li>
+      <li>Discord: <code>dgw#2478</code></li>
+      <li>Zoom: I'm happy to meet over Zoom by appointment.
     </ul>
   </div>
 </body>
