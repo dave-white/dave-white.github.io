@@ -5,12 +5,10 @@
 <?php
 $page = 'teaching';
 include 'side-nav.php';
+include 'lang-ver-anchor.html';
 ?>
-  <?php include 'lang-ver-anchor.html'; ?>
-  <div style="margin-left: 15%">
-    <div id="main" class="main">
-      <?php include 'teaching-tbl.html'; ?>
-    </div>
-  </div>
+<div id="main" class="main">
+  <?php include 'teaching-tbl.html'; ?>
+</div>
 </body>
 </html>
