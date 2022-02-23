@@ -9,7 +9,7 @@ include 'lang-ver-anchor.html';
 ?>
 <div id="main" class="main">
   <h1 id="cv"><em>Curriculum Vitae</em></h1>
-  <p><a href="cv-dgw.pdf">PDF version</a></p>
+  <p><a href="cv-dgw.pdf" target="_blank">PDF version</a></p>
   <hr><h2 id="education">Education</h2>
   <table>
     <tr><td>2017&ndash;present</td><td><strong>Ph.D.</strong>, <i>North Carolina State University</i>, Raleigh, NC<br>Mathematics</td></tr>
