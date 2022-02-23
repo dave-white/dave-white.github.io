@@ -8,9 +8,9 @@ include 'side-nav.php';
 include 'lang-ver-anchor.html';
 ?>
 <div id="main" class="main">
-  <h1>Welcome to the website of<br><i>David White</i>.</h1>
-  <img src="profile.jpeg" alt="Profile picture" width="20%" height="20%" style="margin:1em 2em;float:right">
-
+  <img src="profile.jpeg" alt="Profile picture" width="20%" height="20%" style="margin:1em 1em;float:right">
+  <h1>Welcome to the website of<br></h1>
+  <div style="text-align: center;"><h1><em>David White.</em></h1></div>
   <h2>About me</h2>
 
   <?php include 'grad-yrs-calc.php'; ?>
