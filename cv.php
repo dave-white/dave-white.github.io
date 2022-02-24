@@ -12,16 +12,24 @@ include 'lang-ver-anchor.html';
   <p><a href="cv-dgw.pdf" target="_blank">PDF version</a></p>
   <hr><h2 id="education">Education</h2>
   <table>
-    <tr><td>2017&ndash;present</td><td><strong>Ph.D.</strong>, <i>North Carolina State University</i>, Raleigh, NC<br>Mathematics</td></tr>
-    <tr><td>2007&ndash;2011</td><td><strong>B.A.</strong>, <i>Duke University</i>, Durham, NC<br>Philosophy and Mathematics</td></tr>
+    <tr><td>2017&ndash;present</td><td><strong>Ph.D.</strong> (expected spring 2023), <i>North Carolina State University</i>, Raleigh, NC<br><hr>Mathematics</td></tr>
+    <tr><td>2007&ndash;2011</td><td><strong>B.A.</strong> (2011), <i>Duke University</i>, Durham, NC<br><hr>Philosophy and Mathematics</td></tr>
   </table>
   <hr><h2 id="research">Research</h2>
-  <p>My area of research includes low-dimensional manifold topology and
-  symplectic geometry, in particular Floer-type homologies. I am
-  interested in applications of the latter to constructing invariants of
-  knots and links, and in many variations on the Atiyah-Floer
-  conjecture.</p>
-  <hr><h2 id="pub">Publications</h2>
+  <p>
+    My primary domain of study is <a href="https://en.wikipedia.org/wiki/Low-dimensional_topology">low-dimensional topology</a>, drawing from the fields of
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Algebraic_topology">algebraic topology</a>,</li>
+      <li><a href="https://en.wikipedia.org/wiki/Differential_topology">differential topology</a>,</li>
+      <li><a href="https://en.wikipedia.org/wiki/Symplectic_geometry">symplectic topology</a>.</li>
+      <li><a href="https://en.wikipedia.org/wiki/Knot_theory">knot theory</a>,</li>
+      <li><a href="https://en.wikipedia.org/wiki/Gauge_theory_(mathematics)">gauge theory</a>,</li>
+    </ul>
+
+    Of particular interest are the applications of <a href="https://en.wikipedia.org/wiki/Floer_homology">Floer homology</a> theory and the <a href="https://en.wikipedia.org/wiki/Floer_homology#Atiyah\%E2\%80\%93Floer_conjecture">Atiyah-Floer conjecture</a>.
+
+    </p>
+  <hr><h2 id="pub">Writing</h2>
   <ul>
     <li>White DG (in preparation). "Symplectic Instanton Knot Homology."</li>
   </ul>
@@ -39,9 +47,9 @@ include 'lang-ver-anchor.html';
   </ul>
   <hr><h2 id="work">Employment</h2>
   <table>
-    <tr><td>2017</td><td><strong>Tutor</strong>, <i>Mathnasium</i>, Huntersville, NC<br>Mathematics tutor for K-12 students.</td></tr>
-    <tr><td>2014&ndash;2016</td><td><strong>Associate Software Developer</strong>, <i>iPipeline, Inc.</i>, Exton, PA<br>Front- and backend developer of engine producing prospectus for insurance and other actuarial products.</td></tr>
-    <tr><td>2011&ndash;2013</td><td><strong>Associate Software Developer</strong>, <i>BPM Specialists, Inc.</i>, Atlanta, GA<br>Pega-certified Senior Systems Architect.</td></tr>
+    <tr><td>2017</td><td><strong>Tutor</strong>, <i>Mathnasium</i>, Huntersville, NC<br><hr>Mathematics tutor for K-12 students.</td></tr>
+    <tr><td>2014&ndash;2016</td><td><strong>Associate Software Developer</strong>, <i>iPipeline, Inc.</i>, Exton, PA<br><hr>Front- and backend developer of engine producing prospectus for insurance and other actuarial products.</td></tr>
+    <tr><td>2011&ndash;2013</td><td><strong>Associate Software Developer</strong>, <i>BPM Specialists, Inc.</i>, Atlanta, GA<br><hr>Pega-certified Senior Developer &amp; Systems Architect. Worked on Java-based business process management (BPM) applications for clients including Wells Fargo and <span style="font-variant: small-caps;">tsys</span>.</td></tr>
   </table>
   <hr><h2 id="teaching">Teaching</h2>
   <?php include 'teaching-tbl.html'; ?>
