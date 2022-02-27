@@ -40,7 +40,7 @@ if (php_sapi_name() == 'cli-server') {
   function emit_404()
   {
     http_response_code(404);
-    include 'pg-404.html';
+    include 'static/pg-404.html';
     die;
   }
 
@@ -55,70 +55,64 @@ if (php_sapi_name() == 'cli-server') {
     }
   }
 
-  function handle_rqst($rel_uri)
+  function parse_rqst($uri)
   {
-    $rqst_split_mask = '/([\w\-\/]*\/)?(([\w\-]+)(\.\w+)?)$/';
-    if (preg_match($rqst_split_mask, $rel_uri, $matches, PREG_UNMATCHED_AS_NULL)) {
+    $rqst_split_mask = '/(([\w\-\/]*\/)?([\w\-]+))(\.\w+)?$/';
+    if (preg_match($rqst_split_mask, ltrim($uri, '/'), $matches, PREG_UNMATCHED_AS_NULL)) {
       foreach ($matches as $idx => $val) {
 	if (is_null($val)) {
 	  $matches[$idx] = '';
 	}
       }
-      $dir = $matches[1];
-      $resource = $matches[2];
-      $resource_name = $matches[3];
+      $resource_p = $matches[0];
+      $resource_ph = $matches[1];
+      $resource_t = $matches[2];
+      $resource_tr = $matches[3];
       $resource_ext = $matches[4];
 
-      $new_rel_dir = trim($dir, '/');
-      if (strlen($new_rel_dir) > 0) {
-	if (is_dir($new_rel_dir)) {
-	  chdir($new_rel_dir);
-	} else {
-	  emit_404();
-	}
-      }
-
-      if (strlen($resource) > 0) {
-	if (file_exists($resource)) {
-	  include $resource;
-	} elseif (file_exists($resource_name.'.php')) {
-	  include $resource_name.'.php';
-	} elseif (file_exists($resource_name.'.html')) {
-	  include $resource_name.'.html';
-	} else {
-	  emit_404();
-	}
+      if (file_exists($resource_ph.'-mn.php')) {
+	  $dir = $resource_ph;
+	  $page = $resource_tr;
+	  include 'page.php';
+      } elseif (file_exists($resource_ph.'-mn.html')) {
+	  include $resource_ph.'.html';
+      } elseif (file_exists($resource_p)) {
+	  include $resource_p;
       } else {
-	incl_index();
+	  print_r($matches);
+	  emit_404();
       }
     } else {
-      include 'index.php';
+	emit_404();
     }
   }
 
-  $rel_uri = ltrim($_SERVER['REQUEST_URI'], '/');
-  if (strlen($rel_uri) <= 0) {
+  $uri = $_SERVER['REQUEST_URI'];
+  if ($uri == '/' || strlen($uri) == 0) {
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
       default_lang_home();
     } else {
-      include 'index.php';
+      $page = 'index';
+      include 'page.php';
+    }
+  } elseif (! file_exists($uri)) {
+    parse_rqst($uri);
+  } elseif (is_dir($uri)) {
+    if (! str_ends_with($uri, '/')) {
+      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$uri.'/');
+    } elseif (file_exists($uri.'index.html')) {
+      include $uri.'index.html';
+    } else {
+      emit_404();
+    }
+  } elseif (is_file($uri)) {
+    if (str_ends_with($uri, '/')) {
+      header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.rtrim($uri, '/'));
+    } else {
+      include $uri;
     }
   } else {
-    if (is_dir($rel_uri)) {
-      if (! str_ends_with($rel_uri, '/')) {
-	// if (! handle_rqst($rel_uri))
-	header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$rel_uri.'/');
-      } else {
-	chdir($rel_uri);
-	incl_index();
-      }
-    } else {
-      if (str_ends_with($rel_uri, '/')) {
-	header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.rtrim($rel_uri, '/'));
-      } else {
-	handle_rqst($rel_uri);
-      }
-    }
+    emit_404();
   }
 }
 ?>
