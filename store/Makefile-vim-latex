@@ -1,0 +1,57 @@
+ifndef VIMDIR
+VIMDIR = ~/.vim
+endif
+
+.PHONY: all macvim
+
+all: $(VIMDIR)/autoload/pathogen.vim $(VIMDIR)/vimrc $(VIMDIR)/bundle/vim-latex $(VIMDIR)/bundle/vim-sensible $(VIMDIR)/colors/molokai.vim
+
+$(VIMDIR)/autoload/pathogen.vim:
+	mkdir -p $(VIMDIR)/autoload $(VIMDIR)/bundle
+	curl -LSso $(VIMDIR)/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+$(VIMDIR)/vimrc:
+	@echo "Writing vimrc."
+	@echo "execute pathogen#infect()" >> $@
+	@echo "" >> $@
+	@echo "set number wrap linebreak breakindent nolist cursorline" >> $@
+	@echo "set ignorecase smartcase" >> $@
+	@echo "set softtabstop=4" >> $@
+	@echo "set shiftwidth=4" >> $@
+	@echo "set formatoptions=croqwanj" >> $@
+	@echo "set foldmethod=syntax" >> $@
+	@echo '" turn showcmd off if terminal slow' >> $@
+	@echo "set showcmd" >> $@
+	@echo "" >> $@
+	@echo "autocmd BufWinLeave *.* mkview" >> $@
+	@echo "autocmd BufWinEnter *.* silent loadview" >> $@
+	@echo "" >> $@
+	@echo "colorscheme molokai" >> $@
+	@echo "" >> $@
+	@echo "nnoremap j gj" >> $@
+	@echo "nnoremap gj j" >> $@
+	@echo "nnoremap k gk" >> $@
+	@echo "nnoremap gk k" >> $@
+
+$(VIMDIR)/bundle/vim-latex:
+	git clone https://github.com/vim-latex/vim-latex.git $(VIMDIR)/bundle/vim-latex
+	mkdir -p $(VIMDIR)/ftplugin/tex
+	cp $(VIMDIR)/bundle/vim-latex/ftplugin/latex-suite/texrc $(VIMDIR)/ftplugin/tex/
+
+$(VIMDIR)/bundle/vim-sensible:
+	git clone https://github.com/tpope/vim-sensible.git $(VIMDIR)/bundle/vim-sensible
+
+$(VIMDIR)/colors/molokai.vim:
+	mkdir -p $(VIMDIR)/colors
+	curl -LSso $(VIMDIR)/colors/molokai.vim https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+
+macvim: /usr/local/bin/brew /usr/local/bin/gvim
+
+/usr/local/bin/brew:
+	curl -LSso /tmp/brew-install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+	bash /tmp/brew-install.sh
+	rm /tmp/brew-install.sh
+
+/usr/local/bin/gvim:
+	brew install --cask macvim
+
