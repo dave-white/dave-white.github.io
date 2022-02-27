@@ -1,4 +1,4 @@
-pages_en = index.html research.html teaching.html cv.html
+pages_en = index.html research.html teaching.html resources.html cv.html interests.html
 
 pages_fr = fr/accueil.html fr/recherche.html fr/enseigner.html fr/cv.html
 
