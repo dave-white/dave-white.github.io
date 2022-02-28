@@ -31,7 +31,9 @@ if (php_sapi_name() == 'cli-server') {
     }
 
     if ($issue_lang == 'en') {
-      include 'index.php';
+      $dir = '';
+      $page = 'index';
+      include 'page.php';
     } else {
       header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$issue_lang.'/');
     }
@@ -58,28 +60,27 @@ if (php_sapi_name() == 'cli-server') {
   function parse_rqst($uri)
   {
     $rqst_split_mask = '/(([\w\-\/]*\/)?([\w\-]+))(\.\w+)?$/';
-    if (preg_match($rqst_split_mask, ltrim($uri, '/'), $matches, PREG_UNMATCHED_AS_NULL)) {
+    if (preg_match($rqst_split_mask, $uri, $matches, PREG_UNMATCHED_AS_NULL)) {
       foreach ($matches as $idx => $val) {
 	if (is_null($val)) {
 	  $matches[$idx] = '';
 	}
       }
-      $resource_p = $matches[0];
-      $resource_ph = $matches[1];
-      $resource_t = $matches[2];
-      $resource_tr = $matches[3];
-      $resource_ext = $matches[4];
+      $resource_p = ltrim($matches[0], '/');
+      $resource_pr = ltrim($matches[1], '/');
+      $resource_ph = ltrim($matches[2], '/');
+      $resource_tr = ltrim($matches[3], '/');
+      $resource_ext = ltrim($matches[4], '/');
 
-      if (file_exists($resource_ph.'-mn.php')) {
+      if (file_exists($resource_pr.'-mn.php') || file_exists($resource_ph.'static/'.$resource_tr.'-mn.html')) {
 	  $dir = $resource_ph;
 	  $page = $resource_tr;
 	  include 'page.php';
-      } elseif (file_exists($resource_ph.'-mn.html')) {
-	  include $resource_ph.'.html';
+      } elseif (file_exists($resource_pr.'.html')) {
+	  include $resource_pr.'.html';
       } elseif (file_exists($resource_p)) {
 	  include $resource_p;
       } else {
-	  print_r($matches);
 	  emit_404();
       }
     } else {
@@ -100,6 +101,10 @@ if (php_sapi_name() == 'cli-server') {
   } elseif (is_dir($uri)) {
     if (! str_ends_with($uri, '/')) {
       header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$uri.'/');
+    } elseif (file_exists($uri.'index-mn.php')) {
+      $dir = ltrim($uri, '/');
+      $page = 'index';
+      include 'page.php';
     } elseif (file_exists($uri.'index.html')) {
       include $uri.'index.html';
     } else {

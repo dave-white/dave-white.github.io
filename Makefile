@@ -2,23 +2,21 @@ pages_en = index.html research.html teaching.html resources.html cv.html interes
 
 pages_fr = fr/accueil.html fr/recherche.html fr/enseigner.html fr/cv.html
 
-shrd_deps = head.html side-nav.php
+shrd_deps = static/head.html side-nav.php
 
-shrd_deps_en = pg-array.php lang-ver-anchor.html
+shrd_deps_en = pg-array.php static/lang-ver-anchor.html
 
-shrd_deps_fr = fr/pg-array.php fr/lang-ver-anchor.html
+shrd_deps_fr = fr/pg-array.php fr/static/lang-ver-anchor.html
 
-.PHONY: all
+.PHONY: all clean
 
 all: $(pages_en) $(pages_fr)
 
-$(pages_en): %.html: %.php $(shrd_deps) $(shrd_deps_en)
-	php -f $*.php > $@
+$(pages_en): %.html: %-mn.php $(shrd_deps) $(shrd_deps_en)
+	php -f page.php "" "$*" > $@
 
 $(pages_fr): fr/%.html: fr/%.php $(shrd_deps) $(shrd_deps_fr)
-	cd fr; \
-	php -f $*.php > $*.html;
+	php -f page.php "fr/" "$*" > $@;
 
-$(shrd_deps) $(shrd_deps_en) $(shrd_deps_fr):
-	touch $@
-
+clean:
+	rm $(pages_en) $(pages_fr)

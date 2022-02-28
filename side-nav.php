@@ -10,9 +10,9 @@
   <?php
     else:
   ?>
-      <a href=<?php echo '"'.$dir.$pg_id.'"'; ?>><li class="ncurr"><?php echo $pg_name; ?></li></a>
+      <a href=<?php echo '"'.$pg_id.'"'; ?>><li class="ncurr"><?php echo $pg_name; ?></li></a>
       <!-- for text browsers -->
-      <a hidden href=<?php echo '"'.$dir.$pg_id.'"'; ?>>&lt; go</a>
+      <a hidden href=<?php echo '"'.$pg_id.'"'; ?>>&lt; go</a>
   <?php endif;
     endforeach;
   ?>
