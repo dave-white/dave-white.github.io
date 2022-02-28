@@ -59,18 +59,18 @@ if (php_sapi_name() == 'cli-server') {
 
   function parse_rqst($uri)
   {
-    $rqst_split_mask = '/(([\w\-\/]*\/)?([\w\-]+))(\.\w+)?$/';
+    $rqst_split_mask = '/(([\w\-\/]*\/)*([\w\-]+))(\.\w+)?$/';
     if (preg_match($rqst_split_mask, $uri, $matches, PREG_UNMATCHED_AS_NULL)) {
       foreach ($matches as $idx => $val) {
 	if (is_null($val)) {
 	  $matches[$idx] = '';
 	}
       }
-      $resource_p = ltrim($matches[0], '/');
-      $resource_pr = ltrim($matches[1], '/');
-      $resource_ph = ltrim($matches[2], '/');
-      $resource_tr = ltrim($matches[3], '/');
-      $resource_ext = ltrim($matches[4], '/');
+      $resource_p = $matches[0];
+      $resource_pr = $matches[1];
+      $resource_ph = $matches[2];
+      $resource_tr = $matches[3];
+      $resource_ext = $matches[4];
 
       if (file_exists($resource_pr.'-mn.php') || file_exists($resource_ph.'static/'.$resource_tr.'-mn.html')) {
 	  $dir = $resource_ph;
@@ -88,11 +88,12 @@ if (php_sapi_name() == 'cli-server') {
     }
   }
 
-  $uri = $_SERVER['REQUEST_URI'];
-  if ($uri == '/' || strlen($uri) == 0) {
+  $uri = ltrim($_SERVER['REQUEST_URI'], '/');
+  if (strlen($uri) == 0) {
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
       default_lang_home();
     } else {
+      $dir = '';
       $page = 'index';
       include 'page.php';
     }
@@ -102,7 +103,7 @@ if (php_sapi_name() == 'cli-server') {
     if (! str_ends_with($uri, '/')) {
       header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$uri.'/');
     } elseif (file_exists($uri.'index-mn.php')) {
-      $dir = ltrim($uri, '/');
+      $dir = $uri;
       $page = 'index';
       include 'page.php';
     } elseif (file_exists($uri.'index.html')) {
