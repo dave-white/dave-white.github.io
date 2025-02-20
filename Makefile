@@ -1,5 +1,5 @@
 PAGES = index.html math.html tech.html
-SHARED_DEPS = static/head.html side-nav.php
+SHARED_DEPS = static/head.html static/style.css side-nav.php page.php
 
 pages_fr = fr/accueil.html fr/recherche.html fr/enseigner.html fr/cv.html
 shrd_deps_en = pg-array.php

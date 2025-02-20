@@ -49,6 +49,12 @@ h1,h2,h3 {
 
 .main p { text-align: justify; }
 
+:popover-open {
+	inset: unset;
+	position: absolute;
+	left: 0;
+}
+
 .sidenav {
     color: #fff;
     height: 100%;

@@ -1,4 +1,4 @@
-<div id="sideNav" class="sidenav">
+<div id="sideNav" class="sidenav" popover style="align: left;">
   <ul>
 		<!--<li><a href="fr/accueil"><button>Version fran&ccedil;aise</button></a></li>-->
   <?php
