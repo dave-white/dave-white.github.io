@@ -1,7 +1,6 @@
 <?php
 if (PHP_SAPI === 'cli') {
-  $dir = $argv[1];
-  $page = $argv[2];
+  $page = $argv[1];
 }
 ?>
 <!DOCTYPE html>
@@ -10,16 +9,9 @@ if (PHP_SAPI === 'cli') {
 <body>
 <?php
 include 'side-nav.php';
-include $dir.'static/lang-ver-anchor.html';
 ?>
 <div id="main" class="main">
-<?php
-if (file_exists($dir.$page."-mn.php")) {
-  include $dir.$page."-mn.php";
-} elseif (file_exists($dir.'static/'.$page."-mn.html")) {
-  include $dir."static/".$page."-mn.html";
-}
-?>
+<?php include $dir."static/".$page.".html"; ?>
 </div>
 </body>
 </html>

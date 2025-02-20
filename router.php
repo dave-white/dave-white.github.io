@@ -72,7 +72,7 @@ if (php_sapi_name() == 'cli-server') {
       $resource_tr = $matches[3];
       $resource_ext = $matches[4];
 
-      if (file_exists($resource_pr.'-mn.php') || file_exists($resource_ph.'static/'.$resource_tr.'-mn.html')) {
+      if (file_exists($resource_pr.'.php') || file_exists($resource_ph.'static/'.$resource_tr.'.html')) {
 	  $dir = $resource_ph;
 	  $page = $resource_tr;
 	  include 'page.php';
@@ -102,7 +102,7 @@ if (php_sapi_name() == 'cli-server') {
   } elseif (is_dir($uri)) {
     if (! str_ends_with($uri, '/')) {
       header('Location: http://'.$_SERVER['HTTP_HOST'].'/'.$uri.'/');
-    } elseif (file_exists($uri.'index-mn.php')) {
+    } elseif (file_exists($uri.'index.php')) {
       $dir = $uri;
       $page = 'index';
       include 'page.php';

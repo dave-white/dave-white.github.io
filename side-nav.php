@@ -1,18 +1,26 @@
 <div id="sideNav" class="sidenav">
   <ul>
+		<!--<li><a href="fr/accueil"><button>Version fran&ccedil;aise</button></a></li>-->
   <?php
-  include $dir.'pg-array.php';
+$pg_array = array(
+'index' => array('Home', 'index.html'),
+'cv' => array('<i>CV</i>', 'store/cv.pdf'),
+'math' => array('Math', 'math.html'),
+'tech' => array('Tech', 'tech.html'),
+'teaching' => array('Teaching', 'teaching.html'),
+'resources' => array('Resources', 'resources.html'),
+);
   
-  foreach ($pg_array as $pg_id => $pg_name):
-    if ($pg_id == $page):
+  foreach ($pg_array as $pg_id => $pg_info):
+    if ($page == $pg_id):
   ?>
-      <li class="curr"><?php echo $pg_name; ?></li>
+      <li class="curr"><?php echo $pg_info[0]; ?></li>
   <?php
     else:
   ?>
-      <a href=<?php echo '"'.$pg_id.'"'; ?>><li class="ncurr"><?php echo $pg_name; ?></li></a>
+      <a href="<?php echo $pg_info[1]; ?>"><li class="ncurr"><?php echo $pg_info[0]; ?></li></a>
       <!-- for text browsers -->
-      <a hidden href=<?php echo '"'.$pg_id.'"'; ?>>&lt; go</a>
+      <a hidden href="<?php echo $pg_info[1]; ?>">&lt; go</a>
   <?php endif;
     endforeach;
   ?>
