@@ -4,7 +4,7 @@
   <?php
 $pg_array = array(
 'index' => array('Home', 'index.html'),
-'cv' => array('<i>CV</i>', 'store/cv.pdf'),
+'cv' => array('Resume&#769;', 'store/resume.pdf'),
 'math' => array('Math', 'math.html'),
 'tech' => array('Tech', 'tech.html'),
 /*'teaching' => array('Teaching', 'teaching.html'),
