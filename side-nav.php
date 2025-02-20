@@ -7,8 +7,8 @@ $pg_array = array(
 'cv' => array('<i>CV</i>', 'store/cv.pdf'),
 'math' => array('Math', 'math.html'),
 'tech' => array('Tech', 'tech.html'),
-'teaching' => array('Teaching', 'teaching.html'),
-'resources' => array('Resources', 'resources.html'),
+/*'teaching' => array('Teaching', 'teaching.html'),
+		'resources' => array('Resources', 'resources.html'),*/
 );
   
   foreach ($pg_array as $pg_id => $pg_info):
