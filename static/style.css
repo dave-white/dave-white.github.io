@@ -1,53 +1,12 @@
-@media (prefers-color-scheme: dark) {
-    body {
-        color:#fff;
-        background: #000
-    }
-
-    a:link {
-        color: #9cf
-    }
-
-    a:hover, a:visited:hover {
-        color: #cef
-    }
-
-    a:visited {
-        color: #c9f
-    }
-}
-
-@media(prefers-color-scheme: light) {
-    body {
-        background: #fff4e0;
-        color: #000;
-    }
-}
-
-@media print {
-    body {
-        max-width: none;
-    }
-}
-
 body {
-    margin: 1em auto;
-    padding: 0 .62em;
-	font-size: 1.25vw;
+	font: 1.5em "Liberation Serif", serif;
 	max-width: 80ch;
+	margin: 0 auto;
 }
 
-h1,h2,h3 {
-    line-height: 1.2em;
+.main p {
+	text-align: justify;
 }
-
-#main {
-    margin: 0 4em;
-    padding-left: 15%;
-    margin: auto;
-}
-
-.main p { text-align: justify; }
 
 :popover-open {
 	inset: unset;
@@ -56,57 +15,76 @@ h1,h2,h3 {
 }
 
 .sidenav {
-    color: #fff;
-    height: 100%;
-    width: 15%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 4em;
+	color: #fff;
+	height: 100%;
+	width: 15%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #222;
+	overflow-x: hidden;
+	padding-top: 4em;
 }
 
 .sidenav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
 .sidenav li {
-    padding: 1ex 1ex 1ex 2ex;
-    font-size: 1.75vw;
+	padding: 1ex 1ex 1ex 2ex;
+	font-size: 1.75em;
 }
 
-.sidenav li button {
-	font-size: 1vw;
+.sidenav button {
+	font-size: 1.2em;
 }
 
 .sidenav a {
-    text-decoration: none;
-    color: #eee;
+	text-decoration: none;
+	color: #eee;
 }
 
 .sidenav .curr {
-    background-color: #444;
+	background-color: #444;
 }
 
 .sidenav li.ncurr:hover {
-    background-color: #333;
+	background-color: #333;
 }
 
-.main {
-    margin: 1em auto;
-    padding: 0 .62em;
-    font: 1.2em/1.62 sans-serif;
+@media (prefers-color-scheme: dark) {
+	body {
+		color: #fff;
+		background: #000
+	}
+
+	a:link {
+		color: #9cf
+	}
+
+	a:hover,
+	a:visited:hover {
+		color: #cef
+	}
+
+	a:visited {
+		color: #c9f
+	}
 }
 
-table, th, td {
-    border: 1px solid grey;
-    border-collapse: collapse;
+@media(prefers-color-scheme: light) {
+	body {
+		background: #fff4e0;
+		color: #000;
+	}
 }
 
-th, td {
-    padding: 1em;
+@media print {
+	body {
+		max-width: none;
+	}
 }
+
